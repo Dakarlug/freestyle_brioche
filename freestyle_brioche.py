@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import Queue, thread, datetime, time
 
 class BriocheDoree:
@@ -6,7 +7,14 @@ class BriocheDoree:
   def __init__(self , args=None):	
     self.members  = []
     # Allons nous avoir 50 pizzas , Joeri :), Alioune :) ......
-    self.pizzas        = 50
+    # Ok , Puis que il y'a des discussions sur la mailing liste sur
+    # combien de pizzas , il y'aura , qui va payer , est ce que cela
+    # sera gratuit pour les filles ect , moi je met ici un
+    # hook_pizzas , faites en ce que vous voulez mais que personne
+    # ne touche plus a mon code 
+    # self.pizzas        = 50
+
+    self.pizzas         = self.pizza_parts_hook()
 
     # les pizzas waiters
     self.pizza_waiters =Queue.Queue()
@@ -26,6 +34,10 @@ class BriocheDoree:
     # avant que sa femme ne vienne la chercher :)
     self.members.remove(member)
 
+  def pizza_hook(self):
+    # A implementer par les polemiqueurs 
+    raise NotImplemented 
+
   def entry(self):
     # entree de la brioche doree les membres sont
     # accuelli ici  a MerMoz :)
@@ -44,7 +56,7 @@ class BriocheDoree:
       if raw =="stop":
         # stop
         # evitez d'arreter l'event sans que les pizzas ne soient
-        # distribués sinion , les pizza_waiters vont tous saccager
+        # distribuÃ©s sinion , les pizza_waiters vont tous saccager
         # stop apres que les pizzas soit distibues.
         
         self.start_event = False
@@ -98,8 +110,10 @@ class BriocheDoree:
 
 
         # la distrubtion des Pizzas commence a cette heure
-        if datetime.datetime.now()> datetime.datetime(2013, 10, 10, 18, 58):
-            part   = self.pizzas / len(self.members)
+        if datetime.datetime.now()> datetime.datetime(2013, 10, 11, 11, 06):
+            # Fix de ElWan :)
+            if len(self.members):
+              part   = self.pizzas / len(self.members)
 
             # Moins il y'aura de personnes presentes a la brioche plus il y'aura de
             # parts de Pizzas , Huuuuum :) . c'est le souhait des pizzas waiters
@@ -196,7 +210,7 @@ class Member:
     
   def what_gain(self):
     """
-     ce que le membre qui est venu a la brioche dorée a gagne au sortir 
+     ce que le membre qui est venu a la brioche dorÃ©e a gagne au sortir 
     de  cet evenement 
     """
     print "%s a  appris a la fin de cette presentation" 
@@ -208,15 +222,4 @@ class Member:
       self.presentation, self.name)
 
 
-if __name__ =="__main__":
-  
-   # accueil brioche doree 
-   m = BriocheDoree()
-   m.start_event = True
-   m.entry()
 
-   # au sortir de cet evenement qu'est ce que un membre
-   # a gagne , juste des Pizzas ? , a t'il benefie de l'expertis d'Elwan
-   # sur PyUnicode , De Joerie avec Jekyll?
-   m.reporting()
-   
