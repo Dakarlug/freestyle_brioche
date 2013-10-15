@@ -34,7 +34,7 @@ class BriocheDoree:
     # avant que sa femme ne vienne la chercher :)
     self.members.remove(member)
 
-  def pizza_hook(self):
+  def pizza_parts_hook(self):
     # A implementer par les polemiqueurs 
     raise NotImplemented 
 
