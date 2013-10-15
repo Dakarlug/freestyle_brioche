@@ -14,7 +14,7 @@ class BriocheDoree:
     # ne touche plus a mon code 
     # self.pizzas        = 50
 
-    self.pizzas         = self.pizza_parts_hook()
+    
 
     # les pizzas waiters
     self.pizza_waiters =Queue.Queue()
@@ -113,6 +113,7 @@ class BriocheDoree:
         if datetime.datetime.now()> datetime.datetime(2013, 10, 11, 11, 06):
             # Fix de ElWan :)
             if len(self.members):
+              self.pizzas  = self.pizza_parts_hook()
               part   = self.pizzas / len(self.members)
 
             # Moins il y'aura de personnes presentes a la brioche plus il y'aura de
